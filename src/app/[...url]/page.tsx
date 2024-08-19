@@ -1,4 +1,10 @@
-const Page = () => {
+interface PageProps {
+    params: {
+        url: string | string[] | undefined
+    }
+}
+
+const Page = ({ params }: PageProps) => {
     return (
         <p>hi</p>
     )
