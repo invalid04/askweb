@@ -6,8 +6,13 @@ interface PageProps {
     }
 }
 
+function reconstructUrl({ url }: { url:string[] }) {
+    const decodedComponents = url.map((component) => decodeURIComponent(component))
+    return decodedComponents.join('/')
+}
+
 const Page = ({ params }: PageProps) => {
-    const reconstructedUrl = reconstrustUrl({url: params.url as string})
+    const reconstructedUrl = reconstructUrl({ url: params.url as string[] })
 
     // await ragChat.context.add({
     //     type: 'html',
