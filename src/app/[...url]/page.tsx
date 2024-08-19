@@ -16,7 +16,8 @@ const Page = async ({ params }: PageProps) => {
 
     await ragChat.context.add({
         type: 'html',
-        source: reconstructedUrl
+        source: reconstructedUrl,
+        config: { chunkOverlap: 50, chunkSize: 200 },
     })
 
     return (
