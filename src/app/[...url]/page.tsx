@@ -11,13 +11,13 @@ function reconstructUrl({ url }: { url:string[] }) {
     return decodedComponents.join('/')
 }
 
-const Page = ({ params }: PageProps) => {
+const Page = async ({ params }: PageProps) => {
     const reconstructedUrl = reconstructUrl({ url: params.url as string[] })
 
-    // await ragChat.context.add({
-    //     type: 'html',
-    //     source: 
-    // })
+    await ragChat.context.add({
+        type: 'html',
+        source: reconstructedUrl
+    })
 
     return (
         <p>hi</p>
