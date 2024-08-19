@@ -17,11 +17,13 @@ const Page = async ({ params }: PageProps) => {
 
     const isAlreadyIndexed = await redis.sismember('indexed-urls', reconstructedUrl)
 
-    await ragChat.context.add({
-        type: 'html',
-        source: reconstructedUrl,
-        config: { chunkOverlap: 50, chunkSize: 200 },
-    })
+    if (!isAlreadyIndexed) {
+        await ragChat.context.add({
+            type: 'html',
+            source: reconstructedUrl,
+            config: { chunkOverlap: 50, chunkSize: 200 },
+        })
+    }
 
     return (
         <p>hi</p>
