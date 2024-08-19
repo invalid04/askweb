@@ -1,4 +1,5 @@
 import { ragChat } from "@/lib/rag-chat"
+import { redis } from "@/lib/redis"
 
 interface PageProps {
     params: {
@@ -13,6 +14,8 @@ function reconstructUrl({ url }: { url:string[] }) {
 
 const Page = async ({ params }: PageProps) => {
     const reconstructedUrl = reconstructUrl({ url: params.url as string[] })
+
+    const isAlreadyIndexed = await redis.sismember('indexed-urls', reconstructedUrl)
 
     await ragChat.context.add({
         type: 'html',
